@@ -2,7 +2,12 @@
 export default {
   content: ["./src/**/*.{html,js,ts,svelte}"],
   theme: {
-    extend: {}
+    fontFamily: {
+      sans: "Rethink Sans Variable"
+    }
   },
-  plugins: []
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["cupcake"]
+  }
 };
