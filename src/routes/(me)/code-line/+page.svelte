@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { blur, fly, scale } from "svelte/transition";
+  import { blur } from "svelte/transition";
 
   import type { PageData, ActionData } from "./$types";
   import NongInfo from "$lib/components/NongInfo.svelte";
@@ -28,14 +28,15 @@
       Your code line{hasTwo ? "s are" : " is"}
     </h1>
     {#if data.nongs.length == 1}
-      <NongInfo nong={data.nongs[0]} class="mx-8" />
+      <NongInfo nong={data.nongs[0]} class="mx-8" transitionDelay={1500} />
     {:else if data.nongs.length == 2}
       <div class="flex flex-col sm:flex-row mx-8 sm:my-6">
+        <NongInfo nong={data.nongs[0]} class="basis-0 grow min-w-min" transitionDelay={1500} />
         <NongInfo
-          nong={data.nongs[0]}
-          class="basis-0 grow min-w-min border-b sm:border-b-0 sm:border-r border-base-content/10"
+          nong={data.nongs[1]}
+          class="basis-0 grow min-w-min border-b sm:border-b-0 sm:border-s border-base-content/10"
+          transitionDelay={3000}
         />
-        <NongInfo nong={data.nongs[1]} class="basis-0 grow min-w-min" />
       </div>
     {/if}
   {/if}

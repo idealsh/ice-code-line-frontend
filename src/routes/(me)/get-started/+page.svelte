@@ -1,8 +1,11 @@
 <script lang="ts">
+  import SignedInText from "$lib/components/SignedInText.svelte";
+  import type { PageData } from "./$types";
+
   let dialog: HTMLDialogElement;
   let hasStarted = false;
 
-  let name = "Phi";
+  export let data: PageData;
 
   function onProceed() {
     hasStarted = true;
@@ -13,7 +16,7 @@
 <main class="mx-auto text-center">
   {#if !hasStarted}
     <h1 class="text-4xl font-extrabold tracking-wider">Get started!</h1>
-    <button class="btn btn-primary btn-lg mt-8" on:click={() => dialog.showModal()}>
+    <button class="btn btn-primary btn-lg px-8 mt-8" on:click={() => dialog.showModal()}>
       <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"
         ><path
           fill="currentColor"
@@ -22,10 +25,7 @@
       >
       Randomize my code line
     </button>
-    <p class="mt-4 text-sm">
-      Currently signed in as {name}.
-      <button class="underline ms-0.5">Sign out</button>
-    </p>
+    <SignedInText name={data.me?.name} />
   {:else}
     <p class="text-2xl font-bold">Randomizing your code line</p>
     <span class="loading loading-ring loading-lg my-8"></span>
@@ -41,7 +41,6 @@
           <button class="btn">Back</button>
         </form>
         <form method="POST" action="/code-line">
-          <input type="hidden" name="Test" value="ABC" />
           <button type="submit" class="btn btn-primary" on:click={onProceed}>
             Let’s go
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"

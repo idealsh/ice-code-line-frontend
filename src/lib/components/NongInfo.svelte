@@ -1,12 +1,17 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
-  import type { Nong } from "$lib/Nong";
-  export let nong: Nong;
+  import type { Freshman } from "$lib/types";
+  import { blur } from "svelte/transition";
+  export let nong: Freshman;
   export { classes as class };
   let classes: string = "";
+
+  export let transitionDelay: number;
 </script>
 
-<div class="text-start px-2 sm:px-6 py-4 space-y-5 sm:space-y-8 {classes}">
+<div
+  class="text-start px-2 sm:px-6 py-4 space-y-5 sm:space-y-8 {classes}"
+  in:blur|global={{ delay: transitionDelay, duration: 500 }}
+>
   <div class="">
     <p class="text-2xl sm:text-4xl font-medium mb-2 sm:mb-8">{nong.name}</p>
   </div>
@@ -37,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-auto" in:fly={{ y: 20, duration: 800, delay: 1500 }}>
+  <div class="mx-auto">
     <h2 class="text-lg sm:text-xl font-medium mb-2">About {nong.name}</h2>
     <div class="flex flex-wrap gap-x-8 gap-y-2">
       <div class="basis-0 grow min-w-fit">
