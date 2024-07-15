@@ -4,7 +4,8 @@ import { redirect } from "@sveltejs/kit";
 import { env } from "$env/dynamic/private";
 
 import type { Sophomore } from "$lib/types";
-import type { Handle } from "@sveltejs/kit";
+import type { Handle, HandleFetch } from "@sveltejs/kit";
+import { API_ORIGIN } from "$lib/constants";
 
 function loadMeFromJWT(token: string): Sophomore | undefined {
   try {
@@ -34,4 +35,15 @@ export const handle: Handle = async ({ event, resolve }) => {
   }
 
   return await resolve(event);
+};
+
+export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
+  if (new URL(request.url).origin === API_ORIGIN) {
+    const cookies = event.request.headers.get("cookie");
+    if (cookies) {
+      request.headers.set("cookie", cookies);
+    }
+  }
+
+  return fetch(request);
 };

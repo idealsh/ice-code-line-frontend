@@ -5,12 +5,16 @@
   export { classes as class };
   let classes: string = "";
 
+  export let showTransition: boolean = false;
   export let transitionDelay: number;
 </script>
 
 <div
   class="text-start px-2 sm:px-6 py-4 space-y-5 sm:space-y-8 {classes}"
-  in:blur|global={{ delay: transitionDelay, duration: 500 }}
+  in:blur|global={{
+    delay: showTransition ? transitionDelay : 0,
+    duration: showTransition ? 800 : 0
+  }}
 >
   <div class="">
     <p class="text-2xl sm:text-4xl font-medium mb-2 sm:mb-8">{nong.name}</p>
@@ -47,15 +51,15 @@
     <div class="flex flex-wrap gap-x-8 gap-y-2">
       <div class="basis-0 grow min-w-fit">
         <p class="font-bold tracking-wide">Favorite things</p>
-        <p>{nong.favThings}</p>
+        <p>{nong.favoriteThings}</p>
       </div>
       <div class="basis-0 grow min-w-fit">
-        <p class="font-bold tracking-wide">Favorite stores</p>
-        <p>{nong.stores}</p>
+        <p class="font-bold tracking-wide">Additional preferences</p>
+        <p>{nong.storePreferences}</p>
       </div>
       <div class="basis-0 grow min-w-fit">
-        <p class="font-bold tracking-wide">Anything to tell</p>
-        <p>{nong.thingsToTell}</p>
+        <p class="font-bold tracking-wide">Dietary restrictions</p>
+        <p>{nong.dietaryRestrictions}</p>
       </div>
     </div>
   </div>

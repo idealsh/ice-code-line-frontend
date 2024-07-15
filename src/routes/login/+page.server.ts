@@ -3,13 +3,8 @@ import type { PageServerLoad } from "./$types";
 import { oAuthClient } from "$lib/server/oauth";
 import { oauth2 } from "@googleapis/oauth2";
 import jwt from "jsonwebtoken";
-import { dev } from "$app/environment";
-import { env } from "$env/dynamic/private";
-
-const PROD_REDIRECT = "https://ice-code-line.vercel.app/login";
-const DEV_REDIRECT = "http://localhost:5173/login";
-
-const API_BASE = dev ? "http://localhost:8080" : "https://ice-code-line.idealize.cc";
+import { API_ORIGIN, REDIRECT_URI } from "$lib/constants";
+import { JWT_SECRET } from "$env/static/private";
 
 export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddress }) => {
   const query = url.searchParams;
@@ -21,7 +16,7 @@ export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddre
 
   const { tokens } = await oAuthClient.getToken({
     code,
-    redirect_uri: dev ? DEV_REDIRECT : PROD_REDIRECT
+    redirect_uri: REDIRECT_URI
   });
 
   if (tokens.access_token === null) {
@@ -44,7 +39,7 @@ export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddre
     {
       ip: getClientAddress()
     },
-    Buffer.from(env.JWT_SECRET),
+    Buffer.from(JWT_SECRET),
     {
       subject: id,
       audience: "login",
@@ -53,18 +48,22 @@ export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddre
     }
   );
 
-  const result = await fetch(`${API_BASE}/api/login`, {
+  const result = await fetch(`${API_ORIGIN}/api/login`, {
     headers: {
       Authorization: `Bearer ${loginToken}`
     }
   });
 
-  const data = (await result.json()) as { accessToken: string };
+  if (result.ok) {
+    const data = (await result.json()) as { accessToken: string };
 
-  cookies.set("token", data.accessToken, {
-    maxAge: 30 * 24 * 60 * 60, //  1 month
-    path: "/"
-  });
+    cookies.set("token", data.accessToken, {
+      maxAge: 30 * 24 * 60 * 60, //  1 month
+      path: "/"
+    });
 
-  redirect(302, "/get-started");
+    redirect(302, "/get-started");
+  } else {
+    error(result.status, await result.json());
+  }
 };

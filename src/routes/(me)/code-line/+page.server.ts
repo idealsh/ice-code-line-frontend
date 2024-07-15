@@ -1,36 +1,20 @@
+import { API_ORIGIN } from "$lib/constants";
 import type { Freshman } from "$lib/types";
-import type { PageServerLoad, Actions } from "./$types";
+import type { PageServerLoad } from "./$types";
+import { error, redirect } from "@sveltejs/kit";
 
-export const load: PageServerLoad = async (ev) => {
-  await new Promise((res, rej) => {
-    setTimeout(res, 2000);
-  });
+export const load: PageServerLoad = async ({ fetch }) => {
+  const result = await fetch(`${API_ORIGIN}/api/nongs`);
 
-  let nong1: Freshman = {
-    name: "N’Nong",
-    instagram: "nnonggg",
-    line: "-",
-    favThings: "Programming",
-    stores: "Starbucks",
-    thingsToTell: "Hello"
-  };
-
-  let nong2: Freshman = {
-    name: "N’Chai",
-    instagram: "some_long_ass_username",
-    line: "chai2006",
-    favThings: "Gaming Valorant and some lorem ipsum",
-    stores: "Bearhouse some lorem ipsum dolor sit amet",
-    thingsToTell: "-"
-  };
-
-  return {
-    nongs: [nong1, nong2]
-  };
-};
-
-export const actions = {
-  default: async (ev) => {
-    return { success: true };
+  if (result.ok) {
+    return {
+      nongs: (await result.json()) as Array<Freshman>
+    };
+  } else {
+    if (result.status === 404) {
+      redirect(303, "/get-started");
+    } else {
+      error(result.status, await result.json());
+    }
   }
-} satisfies Actions;
+};

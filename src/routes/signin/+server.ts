@@ -1,10 +1,7 @@
 import { oAuthClient } from "$lib/server/oauth";
 import type { RequestHandler } from "./$types";
 import { redirect } from "@sveltejs/kit";
-import { dev } from "$app/environment";
-
-const PROD_REDIRECT = "https://ice-code-line.vercel.app/login";
-const DEV_REDIRECT = "http://localhost:5173/login";
+import { REDIRECT_URI } from "$lib/constants";
 
 export const GET: RequestHandler = ({ url }) => {
   const authURL = oAuthClient.generateAuthUrl({
@@ -15,7 +12,7 @@ export const GET: RequestHandler = ({ url }) => {
     scope: "https://www.googleapis.com/auth/userinfo.email",
     prompt: "select_account",
     hd: "student.chula.ac.th",
-    redirect_uri: dev ? DEV_REDIRECT : PROD_REDIRECT
+    redirect_uri: REDIRECT_URI
   });
 
   redirect(302, authURL);

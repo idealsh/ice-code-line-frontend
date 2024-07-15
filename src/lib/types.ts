@@ -1,10 +1,11 @@
 export interface Freshman {
   name: string;
+  fullName: string;
   instagram: string;
   line: string;
-  favThings: string;
-  stores: string;
-  thingsToTell?: string;
+  dietaryRestrictions?: string;
+  favoriteThings: string;
+  storePreferences?: string;
 }
 
 export interface Sophomore {

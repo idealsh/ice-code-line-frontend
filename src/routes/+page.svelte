@@ -7,24 +7,10 @@
 
 <main class="max-w-screen-sm px-8 mx-auto mb-8">
   <h1 class="text-4xl font-bold tracking-wide mb-8">
-    <span class="text-2xl mb-2 font-medium">ICE18x19</span>
-    <br />
+    <span class="text-2xl mb-2 font-medium">ICE18x19<br /></span>
     Code line randomizer
   </h1>
   <div class="text-center mt-8">
-    <!-- <label class="input input-bordered flex items-center gap-2">
-        ID
-        <input
-          class="grow"
-          type="text"
-          name="id"
-          pattern="\\d+"
-          title="ID should contain numbers only"
-          placeholder="663xxxxxxx"
-        />
-      </label>
-      <br />
-      <button type="submit" class="btn btn-primary btn-wide">Let's go</button> -->
     {#if data.me}
       <a href="/get-started" class="btn btn-lg w-full max-w-sm">
         Continue
