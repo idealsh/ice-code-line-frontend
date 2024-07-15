@@ -5,19 +5,22 @@
   export { classes as class };
   let classes: string = "";
 
+  export let hasTwo: boolean;
   export let showTransition: boolean = false;
   export let transitionDelay: number;
 </script>
 
 <div
-  class="text-start px-2 sm:px-6 py-4 space-y-5 sm:space-y-8 {classes}"
+  class="text-start px-2 sm:px-6 py-6 space-y-5 sm:space-y-8 {classes}"
   in:blur|global={{
     delay: showTransition ? transitionDelay : 0,
     duration: showTransition ? 800 : 0
   }}
 >
   <div class="">
-    <p class="text-2xl sm:text-4xl font-medium mb-2 sm:mb-8">{nong.name}</p>
+    <p class="{hasTwo ? 'text-3xl' : 'text-4xl'} sm:text-4xl font-semibold mb-2 sm:mb-8">
+      {nong.name}
+    </p>
   </div>
   <div class="">
     <h2 class="text-lg sm:text-xl font-medium mb-1">Contacts</h2>
@@ -30,7 +33,7 @@
           /></svg
         >
         <span>
-          {nong.instagram}
+          {nong.instagram ?? "-"}
         </span>
       </div>
       <div class="flex items-center gap-x-1.5">
@@ -41,25 +44,33 @@
           /></svg
         >
         <span>
-          {nong.line}
+          {nong.line ?? "-"}
         </span>
       </div>
     </div>
   </div>
   <div class="mx-auto">
     <h2 class="text-lg sm:text-xl font-medium mb-2">About {nong.name}</h2>
-    <div class="flex flex-wrap gap-x-8 gap-y-2">
+    <div class="flex flex-wrap gap-x-8 gap-y-3">
       <div class="basis-0 grow min-w-fit">
         <p class="font-bold tracking-wide">Favorite things</p>
         <p>{nong.favoriteThings}</p>
       </div>
       <div class="basis-0 grow min-w-fit">
         <p class="font-bold tracking-wide">Additional preferences</p>
-        <p>{nong.storePreferences}</p>
+        {#if nong.storePreferences !== null}
+          <p>{nong.storePreferences}</p>
+        {:else}
+          <p class="italic">None specified</p>
+        {/if}
       </div>
       <div class="basis-0 grow min-w-fit">
         <p class="font-bold tracking-wide">Dietary restrictions</p>
-        <p>{nong.dietaryRestrictions}</p>
+        {#if nong.dietaryRestrictions !== null}
+          <p>{nong.dietaryRestrictions}</p>
+        {:else}
+          <p class="italic">None specified</p>
+        {/if}
       </div>
     </div>
   </div>

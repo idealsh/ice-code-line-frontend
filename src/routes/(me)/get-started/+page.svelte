@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
   import { enhance } from "$app/forms";
   import { goto } from "$app/navigation";
   import SignedInText from "$lib/components/SignedInText.svelte";
@@ -16,7 +17,11 @@
 
   $: randomizeSuccess = form?.randomizeSuccess ?? false;
 
-  $: if (randomizeSuccess) {
+  $: if (randomizeSuccess) redirect();
+
+  function redirect() {
+    if (!browser) return;
+
     const timeElapsed = startTime ? Date.now() - startTime : 0;
 
     new Promise((res) => setTimeout(res, artificialDelay - timeElapsed)).then(() => {
@@ -38,7 +43,11 @@
   {:else}
     {#if data.alreadyRandomized || randomizeSuccess}
       <h1 class="text-2xl font-bold mb-6">
-        Your code line has {randomizeSuccess ? "" : "already"} been randomized.
+        {#if randomizeSuccess}
+          Your code line has been randomized
+        {:else}
+          You have already randomized your code line
+        {/if}
       </h1>
       <a
         class="btn btn-lg w-full max-w-xs"
@@ -69,8 +78,8 @@
 
   <dialog bind:this={dialog} class="modal">
     <div class="modal-box text-start">
-      <h3 class="text-lg font-bold">A quick reminder</h3>
-      <p class="py-4">Once you proceed, your ** will be picked and cannot be changed</p>
+      <h3 class="text-lg font-bold">Note</h3>
+      <p class="py-4">Once you proceed, your code line will be randomized and can't be changed</p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->

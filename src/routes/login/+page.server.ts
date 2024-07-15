@@ -5,6 +5,7 @@ import { oauth2 } from "@googleapis/oauth2";
 import jwt from "jsonwebtoken";
 import { API_ORIGIN, REDIRECT_URI } from "$lib/constants";
 import { JWT_SECRET } from "$env/static/private";
+import { dev } from "$app/environment";
 
 export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddress }) => {
   const query = url.searchParams;
@@ -59,7 +60,8 @@ export const load: PageServerLoad = async ({ cookies, fetch, url, getClientAddre
 
     cookies.set("token", data.accessToken, {
       maxAge: 30 * 24 * 60 * 60, //  1 month
-      path: "/"
+      path: "/",
+      secure: !dev
     });
 
     redirect(302, "/get-started");

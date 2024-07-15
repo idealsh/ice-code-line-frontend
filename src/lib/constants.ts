@@ -1,8 +1,5 @@
 import { dev } from "$app/environment";
+import * as env from "$env/static/public";
 
-const PROD_REDIRECT = "https://ice-code-line.vercel.app/login";
-const DEV_REDIRECT = "http://localhost:5173/login";
-
-export const REDIRECT_URI = dev ? DEV_REDIRECT : PROD_REDIRECT;
-
-export const API_ORIGIN = dev ? "http://localhost:8080" : "https://ice-code-line.idealize.cc";
+export const REDIRECT_URI = dev ? env.PUBLIC_DEV_LOGIN_REDIRECT : env.PUBLIC_PROD_LOGIN_REDIRECT;
+export const API_ORIGIN = dev ? env.PUBLIC_DEV_API_ORIGIN : env.PUBLIC_PROD_API_ORIGIN;
