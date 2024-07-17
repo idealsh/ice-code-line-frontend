@@ -5,7 +5,7 @@ export default {
   content: ["./src/**/*.{html,js,ts,svelte}"],
   theme: {
     fontFamily: {
-      sans: ['"Rethink Sans"', ...defaultTheme.fontFamily.sans]
+      sans: ["Rethink Sans", ...defaultTheme.fontFamily.sans]
     }
   },
   plugins: [require("daisyui")],

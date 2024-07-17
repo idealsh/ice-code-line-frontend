@@ -25,7 +25,7 @@
     const timeElapsed = startTime ? Date.now() - startTime : 0;
 
     await new Promise((res) => setTimeout(res, artificialDelay - timeElapsed));
-    await goto("/code-line?firstview=true");
+    await goto("/code-line?firstview");
   }
 
   function onProceed() {

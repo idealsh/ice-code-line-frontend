@@ -22,7 +22,7 @@
 
   {#if $page.error}
     <div class="mt-6 grid grid-cols-[auto_minmax(0,_1fr)] gap-x-4">
-      <p class="font-semibold">Error code</p>
+      <p class="font-semibold">Status code</p>
       <p>{$page.status}</p>
       <p class="font-semibold">Error message</p>
       <p>{$page.error.message}</p>
