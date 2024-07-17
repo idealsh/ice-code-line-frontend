@@ -19,14 +19,13 @@
 
   $: if (randomizeSuccess) redirect();
 
-  function redirect() {
+  async function redirect() {
     if (!browser) return;
 
     const timeElapsed = startTime ? Date.now() - startTime : 0;
 
-    new Promise((res) => setTimeout(res, artificialDelay - timeElapsed)).then(() => {
-      goto("/code-line?firstview=true");
-    });
+    await new Promise((res) => setTimeout(res, artificialDelay - timeElapsed));
+    await goto("/code-line?firstview=true");
   }
 
   function onProceed() {

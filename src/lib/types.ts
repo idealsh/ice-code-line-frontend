@@ -6,11 +6,13 @@ export interface Freshman {
   dietaryRestrictions: string | null;
   favoriteThings: string;
   storePreferences: string | null;
+  notes: string | null;
+  phoneNumber: string;
+  nationality: string;
 }
 
 export interface Sophomore {
   name: string;
   id: string;
   fullName: string;
-  doubleCodeLine: string;
 }

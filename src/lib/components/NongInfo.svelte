@@ -24,7 +24,7 @@
   </div>
   <div class="">
     <h2 class="text-lg sm:text-xl font-medium mb-1">Contacts</h2>
-    <div class="flex flex-wrap gap-x-4">
+    <div class="flex flex-wrap gap-x-5 gap-y-0.5">
       <div class="flex items-center gap-x-1.5">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"
           ><path
@@ -47,16 +47,39 @@
           {nong.line ?? "-"}
         </span>
       </div>
+      <div class="flex items-center gap-x-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25c1.12.37 2.32.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z"
+          />
+        </svg>
+        <span>
+          {nong.phoneNumber ?? "-"}
+        </span>
+      </div>
     </div>
   </div>
   <div class="mx-auto">
-    <h2 class="text-lg sm:text-xl font-medium mb-2">About {nong.name}</h2>
-    <div class="flex flex-wrap gap-x-8 gap-y-3">
-      <div class="basis-0 grow min-w-fit">
+    <h2 class="text-lg sm:text-xl font-medium">About {nong.name}</h2>
+    <div class="">
+      <div class="">
+        <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
+          <p class="font-bold tracking-wide">Nationality</p>
+          <p>{nong.nationality}</p>
+        </div>
+        {#if nong.notes}
+          <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
+            <p class="font-bold tracking-wide">Notes</p>
+            <p>{nong.notes}</p>
+          </div>
+        {/if}
+      </div>
+      <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
         <p class="font-bold tracking-wide">Favorite things</p>
         <p>{nong.favoriteThings}</p>
       </div>
-      <div class="basis-0 grow min-w-fit">
+      <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
         <p class="font-bold tracking-wide">Additional preferences</p>
         {#if nong.storePreferences !== null}
           <p>{nong.storePreferences}</p>
@@ -64,7 +87,7 @@
           <p class="italic">None specified</p>
         {/if}
       </div>
-      <div class="basis-0 grow min-w-fit">
+      <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
         <p class="font-bold tracking-wide">Dietary restrictions</p>
         {#if nong.dietaryRestrictions !== null}
           <p>{nong.dietaryRestrictions}</p>
