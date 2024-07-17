@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@fontsource-variable/rethink-sans':
-        specifier: ^5.0.5
-        version: 5.0.5
       '@googleapis/oauth2':
         specifier: ^1.0.7
         version: 1.0.7
@@ -211,9 +208,6 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
-
-  '@fontsource-variable/rethink-sans@5.0.5':
-    resolution: {integrity: sha512-+AZ4wJb/bmrbQmEqrb+obJ2FDng/0zwlXCCeecE9ZjkuV+g15JVC0KJPSoxsrpzTFSUsEWm9Ya+Nx+jccgGnaw==}
 
   '@googleapis/oauth2@1.0.7':
     resolution: {integrity: sha512-8vElraqqkyOkoGv0BeYZAh3OTlyxuy9Xisv9P+Pekz/PIB3c5GHnxndw5ANxlKuGXf123hgBpToUuG+4qkarlw==}
@@ -1365,8 +1359,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.21.5':
     optional: true
-
-  '@fontsource-variable/rethink-sans@5.0.5': {}
 
   '@googleapis/oauth2@1.0.7':
     dependencies:

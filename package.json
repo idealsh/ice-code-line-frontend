@@ -30,7 +30,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@fontsource-variable/rethink-sans": "^5.0.5",
     "@googleapis/oauth2": "^1.0.7",
     "jsonwebtoken": "^9.0.2"
   }

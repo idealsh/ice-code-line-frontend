@@ -1,5 +1,4 @@
 <script>
-  import "@fontsource-variable/rethink-sans";
   import "../app.css";
 </script>
 

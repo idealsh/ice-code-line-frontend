@@ -1,0 +1,16 @@
+/* latin */
+@font-face {
+  font-family: "Rethink Sans";
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/fonts/RethinkSans-Italic.ttf) format("truetype");
+}
+/* latin */
+@font-face {
+  font-family: "Rethink Sans";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(/fonts/RethinkSans.ttf) format("truetype");
+}
