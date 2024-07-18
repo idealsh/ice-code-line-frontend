@@ -77,8 +77,9 @@
 
   <dialog bind:this={dialog} class="modal">
     <div class="modal-box text-start">
-      <h3 class="text-lg font-bold">Note</h3>
-      <p class="py-4">Once you proceed, your code line will be randomized and can't be changed</p>
+      <h3 class="text-xl font-bold mb-3">Note</h3>
+      <p class="">Once you proceed, your code line will be randomized.</p>
+      <p class="mt-2">Code lines can only be randomized once.</p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
