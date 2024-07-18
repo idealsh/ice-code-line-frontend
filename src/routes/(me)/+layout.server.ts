@@ -6,7 +6,7 @@ import type { LayoutServerLoad } from "./$types";
 export const load: LayoutServerLoad = async ({ fetch }) => {
   const result = await fetch(`${API_ORIGIN}/api/nongs`);
 
-  let nongs: Array<Freshman> | null | undefined = undefined;
+  let nongs: Array<Freshman> | null;
 
   if (result.ok) {
     nongs = (await result.json()) as Array<Freshman>;

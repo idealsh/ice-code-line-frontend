@@ -23,6 +23,15 @@
 
   $: transitionDuration = onlyIf(showTransition, 800);
 
+  let animatedImage = true;
+
+  if (browser) {
+    if (showTransition) {
+      animatedImage = false;
+      setTimeout(() => (animatedImage = true), 1500);
+    }
+  }
+
   /*
     shorthand for convenience. condition needs to be passed
     for the statement to react to the changes in the condition
@@ -32,18 +41,23 @@
   }
 </script>
 
-<main class="text-start {hasTwo ? 'w-fit max-w-screen-lg' : 'w-full max-w-screen-md'} mx-auto my-8">
-  <h1
-    class="text-xl sm:text-2xl font-bold mx-8 px-2 sm:px-6 {hasTwo ? 'text-center' : ''}"
-    in:blur={{ duration: transitionDuration }}
-  >
-    Your ICE code line{hasTwo ? "s are" : " is"}
-  </h1>
+<main class="text-start {hasTwo ? 'w-fit max-w-screen-lg' : 'w-full max-w-screen-md'} mx-auto mb-8">
+  <div class="mx-8 px-2 sm:px-6">
+    <img
+      src={animatedImage ? "/cubemelt-celebrate.webp" : "/cubemelt-celebrate-1.webp"}
+      alt=""
+      srcset=""
+      class="inline h-24 my-4"
+    />
+    <h1 class="text-xl sm:text-2xl font-semibold" in:blur={{ duration: transitionDuration }}>
+      Your ICE code line{hasTwo ? "s are" : " is"}
+    </h1>
+  </div>
   {#if data.nongs.length == 1}
     <NongInfo
       nong={data.nongs[0]}
       hasTwo={false}
-      class="mx-8"
+      class="mx-8 sm:my-6"
       transitionDelay={onlyIf(showTransition, 1500)}
       {transitionDuration}
     />
@@ -67,12 +81,12 @@
   {/if}
   <div
     class="px-2 sm:px-6 mx-8 mt-4 text-sm"
-    class:text-center={hasTwo}
     in:blur={{
       duration: transitionDuration,
       delay: onlyIf(showTransition, hasTwo ? 3000 : 1500)
     }}
   >
-    <SignedInText name={data.me?.name} />
+    <SignedInText name={"Ideal"} />
+    <p>Code lines are final and cannot be swapped or otherwise changed in any case.</p>
   </div>
 </main>

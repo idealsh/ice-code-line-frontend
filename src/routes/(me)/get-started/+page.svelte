@@ -38,7 +38,7 @@
 <main class="mx-auto text-center px-8">
   {#if loading}
     <p class="text-2xl font-bold">Randomizing your code line</p>
-    <span class="loading loading-ring loading-lg my-8"></span>
+    <img src="/cubemelt-drive.gif" alt="" class="inline h-28 my-2 -ml-1" />
   {:else}
     {#if data.alreadyRandomized || randomizeSuccess}
       <h1 class="text-2xl font-bold mb-6">
@@ -78,8 +78,10 @@
   <dialog bind:this={dialog} class="modal">
     <div class="modal-box text-start">
       <h3 class="text-xl font-bold mb-3">Note</h3>
-      <p class="">Once you proceed, your code line will be randomized.</p>
-      <p class="mt-2">Code lines can only be randomized once.</p>
+      <p>
+        Once your code line is randomized, the result is final and cannot be swapped or changed in
+        any case.
+      </p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->

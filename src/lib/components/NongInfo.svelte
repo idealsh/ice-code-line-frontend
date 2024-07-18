@@ -11,7 +11,7 @@
 </script>
 
 <div
-  class="text-start px-2 sm:px-6 py-6 space-y-5 sm:space-y-8 {classes}"
+  class="text-start px-2 sm:px-6 py-6 sm:py-2 space-y-5 sm:space-y-8 {classes}"
   in:blur|global={{
     delay: transitionDelay,
     duration: transitionDuration
