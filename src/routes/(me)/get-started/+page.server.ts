@@ -1,18 +1,8 @@
 import { API_ORIGIN } from "$lib/constants";
 import jwt from "jsonwebtoken";
 import { error } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
+import type { Actions } from "./$types";
 import { JWT_SECRET } from "$env/static/private";
-
-export const load: PageServerLoad = async ({ fetch }) => {
-  const result = await fetch(`${API_ORIGIN}/api/nongs`, {
-    method: "HEAD"
-  }).catch(() => {});
-
-  return {
-    alreadyRandomized: result?.ok ?? false
-  };
-};
 
 export const actions = {
   default: async ({ getClientAddress, fetch, locals }) => {

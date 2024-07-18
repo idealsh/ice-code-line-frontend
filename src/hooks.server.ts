@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { redirect } from "@sveltejs/kit";
 
-import { env } from "$env/dynamic/private";
+import { JWT_SECRET } from "$env/static/private";
 
 import type { Sophomore } from "$lib/types";
 import type { Handle, HandleFetch } from "@sveltejs/kit";
@@ -9,7 +9,7 @@ import { API_ORIGIN } from "$lib/constants";
 
 function loadMeFromJWT(token: string): Sophomore | undefined {
   try {
-    const payload = jwt.verify(token, env.JWT_SECRET) as { me: Sophomore };
+    const payload = jwt.verify(token, JWT_SECRET) as { me: Sophomore };
     return payload.me;
   } catch (error) {
     const name = (error as any)?.name as string | undefined;
