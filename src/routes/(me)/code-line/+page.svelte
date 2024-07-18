@@ -86,7 +86,7 @@
       delay: onlyIf(showTransition, hasTwo ? 3000 : 1500)
     }}
   >
-    <SignedInText name={"Ideal"} />
+    <SignedInText name={data.me?.name} />
     <p>Code lines are final and cannot be swapped or otherwise changed in any case.</p>
   </div>
 </main>
