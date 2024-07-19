@@ -19,7 +19,7 @@
 >
   <div class="">
     <p class="{hasTwo ? 'text-3xl' : 'text-4xl'} sm:text-4xl font-semibold mb-2 sm:mb-8">
-      {nong.name}
+      N'{nong.name}
     </p>
   </div>
   <div class="">
@@ -61,7 +61,7 @@
     </div>
   </div>
   <div class="mx-auto">
-    <h2 class="text-lg sm:text-xl font-medium">About {nong.name}</h2>
+    <h2 class="text-lg sm:text-xl font-medium">About N'{nong.name}</h2>
     <div class="">
       <div class="">
         <div class="inline-block min-w-36 me-8 mt-3 sm:mt-2">
