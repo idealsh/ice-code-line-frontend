@@ -41,6 +41,11 @@
         >
         Continue with Chula account
       </a>
+      {#if data.hasLineUA}
+        <p class="my-4 text-sm">
+          For best results, please use a different browser (e.g. Safari, Chrome, Firefox)
+        </p>
+      {/if}
     {/if}
   </div>
 </main>

@@ -28,6 +28,11 @@ export const handle: Handle = async ({ event, resolve }) => {
   const token = event.cookies.get("token");
   event.locals.me = token ? loadMeFromJWT(token) : undefined;
 
+  const ua = event.request.headers.get("user-agent");
+  const hasLineUA = ua?.split(" ")?.find((e) => e.match(/^Line\/.+/i) !== null) !== undefined;
+
+  event.locals.hasLineUA = hasLineUA;
+
   if (event.route.id?.startsWith("/(me)")) {
     if (!event.locals.me) {
       redirect(303, "/");

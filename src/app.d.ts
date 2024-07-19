@@ -8,6 +8,7 @@ declare global {
     // interface Error {}
     interface Locals {
       me: Sophomore | undefined;
+      hasLineUA: boolean;
     }
     // interface PageData {}
     // interface PageState {}
