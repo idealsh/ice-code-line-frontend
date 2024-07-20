@@ -50,17 +50,26 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
     }
   }
 
+  const SERVER_DOWN_ERROR = { message: "Server might be down, please try again later" };
+
+  let response: Response;
   try {
-    return await fetch(request);
+    response = await fetch(request);
   } catch (err) {
     if (err instanceof TypeError) {
       const cause = err.cause as { code?: string } | undefined;
 
       if (cause?.code === "ECONNREFUSED") {
-        error(503, "Server might be down, please try again later.");
+        error(503, SERVER_DOWN_ERROR);
       }
     }
 
-    error(500, "Failed to connect to server");
+    error(502, { message: "Failed to connect to server" });
+  }
+
+  if (response.status === 502 || response.status == 503) {
+    error(response.status, SERVER_DOWN_ERROR);
+  } else {
+    return response;
   }
 };
