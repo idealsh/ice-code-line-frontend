@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { redirect } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 
 import { JWT_SECRET } from "$env/static/private";
 
@@ -50,5 +50,17 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
     }
   }
 
-  return fetch(request);
+  try {
+    return await fetch(request);
+  } catch (err) {
+    if (err instanceof TypeError) {
+      const cause = err.cause as { code?: string } | undefined;
+
+      if (cause?.code === "ECONNREFUSED") {
+        error(503, "Server might be down, please try again later.");
+      }
+    }
+
+    error(500, "Failed to connect to server");
+  }
 };
