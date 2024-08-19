@@ -5,7 +5,7 @@
   export let data: LayoutData;
 </script>
 
-<main class="max-w-screen-sm px-8 mx-auto mb-8">
+<main class="max-w-screen-sm px-8 mx-auto mb-4">
   <h1 class="text-4xl font-bold tracking-wide mb-8">
     <span class="text-2xl mb-2 font-medium">ICE18x19<br /></span>
     Code line randomizer
